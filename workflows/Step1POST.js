@@ -19,7 +19,7 @@
     console.log("E2E Step 1 POST Valid User Fake Name Value: " + showRandomName);
 
     function generateValue() {
-        // Generates a valid donation value up to 25 dollars
+        // Generates a random Int between 10000-25000
         var min = Math.ceil(10000);
         var max = Math.floor(25000);
 
