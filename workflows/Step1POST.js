@@ -14,10 +14,6 @@
         return firstLetter + returnStr;
     }
 
-    pm.variables.set("randomName", garbageName());
-    var showRandomName = pm.variables.get("randomName");
-    console.log("E2E Step 1 POST Valid User Fake Name Value: " + showRandomName);
-
     function generateValue() {
         // Generates a random Int between 10000-25000
         var min = Math.ceil(10000);
@@ -26,11 +22,12 @@
         return String((Math.random() * (max - min) + min).toFixed(0));
     }
 
-    // var numValue = generateValue();
+    pm.variables.set("randomName", garbageName());
     pm.variables.set("randomInt", generateValue());
-
+    var showRandomName = pm.variables.get("randomName");
     var showRandomInt = pm.variables.get("randomInt");
-    console.log("E2E Step 1 POST Valid User Email Random Int Value: " + showRandomInt);
+    console.log("E2E Step 1 POST Valid User Fake Name Value: " + showRandomName);
+    console.log("E2E Step 1 POST Valid User Email Value: " + showRandomName + ".test" + showRandomInt + "@example.com");
 
     // Sets the random generated variable to a global value
     // pm.globals.set("randomNum", numValue);
