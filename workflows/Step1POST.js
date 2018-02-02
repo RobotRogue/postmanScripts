@@ -29,15 +29,6 @@
     console.log("E2E Step 1 POST Valid User Fake Name Value: " + showRandomName);
     console.log("E2E Step 1 POST Valid User Email Value: " + showRandomName + ".test" + showRandomInt + "@example.com");
 
-    // Sets the random generated variable to a global value
-    // pm.globals.set("randomNum", numValue);
-
-    // Calls the global variable and stores as a new local variable
-    // var whyNotWork = pm.globals.get("randomNum");
-
-    // Logs the stored local variable to make sure it worked
-    // console.log("The generated value is stored globally as: " + whyNotWork);
-
 
 
 // ## THE REQUEST ITSELF:
