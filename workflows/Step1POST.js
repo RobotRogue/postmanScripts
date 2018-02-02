@@ -50,7 +50,7 @@
     // POST {{API_URL}}/api/v2/users
 
     // Header(s):
-    //content-type: application/vnd.api+json
+    // content-type: application/vnd.api+json
 
     // Body:
     /*
@@ -75,9 +75,9 @@
 
     // Set Response Variables:
     // Stores POST Response JSON
-    var jsonData = pm.response.json(); 
+    var jsonData = pm.response.json();
     // stores response Id of created user (to pass to other steps/tests)
-    pm.environment.set("e2eUserId", jsonData.data.id); 
+    pm.environment.set("e2eUserId", jsonData.data.id);
 
     // Status Test:
     pm.test("Status code is 201 Created", function () {

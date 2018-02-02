@@ -27,7 +27,7 @@
     // PATCH {{API_URL}}/api/v2/users/{{e2eUserId}}
 
     // Header(s):
-    //content-type: application/vnd.api+json
+    // content-type: application/vnd.api+json
 
     // Body:
     /*
