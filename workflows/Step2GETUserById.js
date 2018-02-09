@@ -9,7 +9,7 @@
 // ## (Sanitized for Obvious Reasons)
 
     // Method / URL
-    // GET {{API_URL}}/api/v2/users/{{e2eUserId}}
+    // GET {{api_host}}/api/v2/users/{{e2eUserId}}
 
     // Header(s):
     // content-type: application/vnd.api+json

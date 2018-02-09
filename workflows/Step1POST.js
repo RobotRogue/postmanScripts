@@ -35,7 +35,7 @@
 // ## (Sanitized for Obvious Reasons)
 
     // Method / URL
-    // POST {{API_URL}}/api/v2/users
+    // POST {{api_host}}/api/v2/users
 
     // Header(s):
     // content-type: application/vnd.api+json

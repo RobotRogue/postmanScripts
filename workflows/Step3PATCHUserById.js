@@ -24,7 +24,7 @@
 // ## (Sanitized for Obvious Reasons)
 
     // Method / URL
-    // PATCH {{API_URL}}/api/v2/users/{{e2eUserId}}
+    // PATCH {{api_host}}/api/v2/users/{{e2eUserId}}
 
     // Header(s):
     // content-type: application/vnd.api+json
