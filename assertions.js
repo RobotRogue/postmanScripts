@@ -3,7 +3,7 @@
 
 
 // Status Check Test:
-pm.test("Status code is 200", function () {
+pm.test("Expecting Status code to be 200", function () {
     pm.response.to.have.status(200);
 });
 
