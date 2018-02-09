@@ -29,7 +29,6 @@ function generateValue() {
 
 // var numValue = generateValue();
 pm.variables.set("randomInt", generateValue());
-
 var showRandomInt = pm.variables.get("randomInt");
 console.log("E2E Step 1 POST Valid User Email Random Int Value: " + showRandomInt);
 

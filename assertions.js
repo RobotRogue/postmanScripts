@@ -20,12 +20,6 @@ pm.test("Response should not contain error", function () {
 });
 
 
-// JSON String Existence Test:
-pm.test("Response Body Contains Specific Email Address", function () {
-    pm.response.to.have.body("shirley.nader@bins.info");
-});
-
-
 // JSON Contains ID Key:
 pm.test("Response Body contains ID key", function () {
     pm.expect(pm.response.text()).to.include("id");
@@ -33,8 +27,8 @@ pm.test("Response Body contains ID key", function () {
 
 
 // JSON Value Equality Check:
+var jsonData = pm.response.json(); // Better to create this outside of the funciton to make it reusable for other tests if needed.
 pm.test("Response type key contains 'users' value", function () {
-    var jsonData = pm.response.json();
     pm.expect(jsonData.data[0].type).to.eql("users");
 });
 
