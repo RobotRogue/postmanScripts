@@ -2,8 +2,9 @@
 // These are handy for generating values to pass to the request, or to verify against
 // These can be added per method, or at the folder or collection level (sort of as a beforeEach)
 
+
+// Creates a text string that is 15 characters long, starting with a capital letter
 function garbageName() {
-    // Creates a text string that is 15 characters long, starting with a capital letter.
     var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var lowercase = "abcdefghijklmnopqrstuvwxyz";
     var returnStr = '';
@@ -19,8 +20,9 @@ pm.variables.set("randomName", garbageName());
 var showRandomName = pm.variables.get("randomName");
 console.log("E2E Step 1 POST Valid User Fake Name Value: " + showRandomName);
 
+
+// Generates a random Int between 10000-25000
 function generateValue() {
-    // Generates a random Int between 10000-25000
     var min = Math.ceil(10000);
     var max = Math.floor(25000);
 
