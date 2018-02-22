@@ -32,3 +32,34 @@ function generateValue() {
 pm.variables.set("randomInt", generateValue());
 var showRandomInt = pm.variables.get("randomInt");
 console.log("E2E Step 1 POST Valid User Email Random Int Value: " + showRandomInt);
+
+
+
+// The below sends a POST to ensure that at least ONE allocation exists.
+// It then passes the allocation ID to the GET request.
+pm.sendRequest({
+    url: pm.environment.get("api_host") + '/api/v2/fundAllocations',
+    method: 'POST',
+    header: ['Content-Type:application/vnd.api+json',
+        'Accept:application/vnd.api+json',
+        'Authorization:' + pm.environment.get("company_api_key")
+    ],
+    body: {
+        mode: 'raw',
+        raw: JSON.stringify({
+            "data": {
+                "type": "fundAllocations",
+                "attributes": {
+                    "amount": "5.00",
+                    "noteToRecipient": "UI Note to Recipient",
+                    "noteToSelf": "UI Note to Self",
+                    "email": "nelson.gill@chimp.net",
+                    "suppressEmail": true
+                }
+            }
+        })
+    }
+}, function (err, res) {
+    console.log(res);
+    pm.environment.set("fundAllocationId", res.json().data.id);
+});
