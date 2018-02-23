@@ -17,8 +17,7 @@ function garbageName() {
 }
 
 pm.variables.set("randomName", garbageName());
-var showRandomName = pm.variables.get("randomName");
-console.log("E2E Step 1 POST Valid User Fake Name Value: " + showRandomName);
+console.log("E2E Step 1 POST Valid User Fake Name Value: " + pm.variables.get("randomName"));
 
 
 // Generates a random Int between 10000-25000
@@ -30,8 +29,7 @@ function generateValue() {
 }
 
 pm.variables.set("randomInt", generateValue());
-var showRandomInt = pm.variables.get("randomInt");
-console.log("E2E Step 1 POST Valid User Email Random Int Value: " + showRandomInt);
+console.log("E2E Step 1 POST Valid User Email Random Int Value: " + pm.variables.get("randomInt"));
 
 
 
