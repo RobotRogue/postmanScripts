@@ -62,4 +62,4 @@ pm.sendRequest({
 }, function (err, res) {
     console.log(res);
     pm.environment.set("fundAllocationId", res.json().data.id);
-});
+});1
