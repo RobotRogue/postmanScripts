@@ -1,0 +1,2584 @@
+{
+	"info": {
+		"name": "QA CHIMP API V2",
+		"_postman_id": "7194736e-8662-a19e-185c-80c00a2fdfb6",
+		"description": "# Where tests reside for all V2 API's that have been created.  \n\n_Requires you set up an environment with a key/value of:_  \n\n*KEY:*  api_host  \n*Value:*  (url of the API you plan to test, excluding /api/v2)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Companies API (WIP)",
+			"description": "",
+			"item": [
+				{
+					"name": "Test Cases",
+					"description": "",
+					"item": [
+						{
+							"name": "/companies/{{company_id}}?include=fund - Valid Company ID",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "4faef628-0c11-4daa-95d2-c3efb6e4b2f8",
+										"type": "text/javascript",
+										"exec": [
+											"// Set Test Variables:",
+											"pm.environment.set(\"company_id\", 123);"
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "5ab7090b-399d-422b-9412-80f0b811de68",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"// JSON Content Test:",
+											"pm.test(\"Response should not contain error\", function () { ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"",
+											"// JSON Contains ID Key:",
+											"// pm.test(\"Response Body contains ID key\", function () {",
+											"//    pm.expect(pm.response.text()).to.include(\"id\");",
+											"// });",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/companies/{{company_id}}?include=fund",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"companies",
+										"{{company_id}}"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "fund",
+											"equals": true
+										}
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/companies/{{company_id}}?include=fund - Blank Company ID",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ed68736e-75f5-465b-afbe-7445873e1306",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "2c8ff98b-5ebb-4536-b079-95cde85f7bce",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"// JSON Contains ID Key:",
+											"// pm.test(\"Response Body contains ID key\", function () {",
+											"//    pm.expect(pm.response.text()).to.include(\"id\");",
+											"// });",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/companies/?include=fund",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"companies",
+										""
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "fund",
+											"equals": true
+										}
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/companies/{{company_id}}?include=fund - Invalid Company ID",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "690adab5-2856-486c-b182-61247fb862c2",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "abc5a1ae-403a-49e5-9210-971b357360d2",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/companies/ABCD1234DCBA?include=fund",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"companies",
+										"ABCD1234DCBA"
+									],
+									"query": [
+										{
+											"key": "include",
+											"value": "fund",
+											"equals": true
+										}
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/companies/{{company_id}}?include=fund - Missing Include Parameter",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "4faef628-0c11-4daa-95d2-c3efb6e4b2f8",
+										"type": "text/javascript",
+										"exec": [
+											"// Set Test Variables:",
+											"pm.environment.set(\"company_id\", 123);"
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "f09c1213-e4de-4807-a1ef-8a7a19c6efe1",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/companies/{{company_id}}",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"companies",
+										"{{company_id}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "End to End Tests",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				}
+			]
+		},
+		{
+			"name": "P2P Allocation API",
+			"description": "Introduction\n===\n\n\nFlow\n===\n\n\nNotes\n===\nThis presumes the Company Fund already has enough money in it to cover the P2P gifts so no Donation is needed.",
+			"item": [
+				{
+					"name": "Test Cases",
+					"description": "",
+					"item": [
+						{
+							"name": "/fundAllocations/{fund_allocation_id} - P2P Allocation Status",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "f4e63dac-74aa-4ca4-a993-7f2098c111dc",
+										"type": "text/javascript",
+										"exec": [
+											"// Set Test Variables:",
+											"",
+											"// This variable changes often, which will be a pain for command line automation.",
+											"// Need to make the pre-req get an id using 'blank fund allocation id' test and grab the first value in the response.",
+											"pm.environment.set(\"fund_allocation_id\", 116);"
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "9fd14874-55de-4f9e-8a46-a06d5593a7a5",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"// JSON Content Test:",
+											"pm.test(\"Response should not contain error\", function () { ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{company_api_key}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations/{{fund_allocation_id}}",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations",
+										"{{fund_allocation_id}}"
+									]
+								},
+								"description": null
+							},
+							"response": [
+								{
+									"id": "98e354f4-f305-438e-bd66-2008795ebe08",
+									"name": "Get Fund Allocation Status",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "{{api_host}}/api/v2/users/{{user_id}}?include=status",
+											"host": [
+												"{{api_host}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"users",
+												"{{user_id}}"
+											],
+											"query": [
+												{
+													"key": "include",
+													"value": "status",
+													"equals": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "",
+									"header": [],
+									"cookie": [],
+									"responseTime": "0",
+									"body": "{\n  \"data\": {\n    \"fundAllocation_status\": unclaimed\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "/fundAllocations/{fund_allocation_id} - Blank Fund Allocation Id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "4cc9caba-9bcf-4bd3-9ff4-8fae3504bedf",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "969b3c78-254a-4e5b-99ce-949d723c94b1",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{company_api_key}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations/",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations",
+										""
+									]
+								},
+								"description": "When no ID is passed, it is expected to return all allocations for the given company API Key"
+							},
+							"response": [
+								{
+									"id": "5f65dd34-0e20-46b7-a53f-a9a56aecb1ec",
+									"name": "Get Fund Allocation Status",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "{{api_host}}/api/v2/users/{{user_id}}?include=status",
+											"host": [
+												"{{api_host}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"users",
+												"{{user_id}}"
+											],
+											"query": [
+												{
+													"key": "include",
+													"value": "status",
+													"equals": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "",
+									"header": [],
+									"cookie": [],
+									"responseTime": "0",
+									"body": "{\n  \"data\": {\n    \"fundAllocation_status\": unclaimed\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "/fundAllocations/{fund_allocation_id} - Invalid Fund Allocation Id",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "45600beb-625e-4001-a335-2ff018ab3c78",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a989646b-9918-4608-98b3-75eecd68d86f",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{company_api_key}}"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations/ABCD1234DCBA",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations",
+										"ABCD1234DCBA"
+									]
+								},
+								"description": "When invalid data is passed, it is expected to return a 4xx error"
+							},
+							"response": [
+								{
+									"id": "a6b88242-11a8-45c2-9e46-8113514397e5",
+									"name": "Get Fund Allocation Status",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "{{api_host}}/api/v2/users/{{user_id}}?include=status",
+											"host": [
+												"{{api_host}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"users",
+												"{{user_id}}"
+											],
+											"query": [
+												{
+													"key": "include",
+													"value": "status",
+													"equals": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "",
+									"header": [],
+									"cookie": [],
+									"responseTime": "0",
+									"body": "{\n  \"data\": {\n    \"fundAllocation_status\": unclaimed\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "/fundAllocations/{fund_allocation_id} - Missing Auth API Key",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "45600beb-625e-4001-a335-2ff018ab3c78",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "bcf18f32-b775-46cc-b4bc-8b741763785b",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": ""
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations/ABCD1234DCBA",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations",
+										"ABCD1234DCBA"
+									]
+								},
+								"description": "When invalid data is passed, it is expected to return a 4xx error"
+							},
+							"response": [
+								{
+									"id": "8f1fbc7c-085a-4bfb-b3ac-027fc6812ea2",
+									"name": "Get Fund Allocation Status",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "{{api_host}}/api/v2/users/{{user_id}}?include=status",
+											"host": [
+												"{{api_host}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"users",
+												"{{user_id}}"
+											],
+											"query": [
+												{
+													"key": "include",
+													"value": "status",
+													"equals": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "",
+									"header": [],
+									"cookie": [],
+									"responseTime": "0",
+									"body": "{\n  \"data\": {\n    \"fundAllocation_status\": unclaimed\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "/fundAllocations/{fund_allocation_id} - Invalid Auth API Key copy",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "45600beb-625e-4001-a335-2ff018ab3c78",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "d40973e8-928d-4693-992c-b7e35e5f26ac",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 500ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "ef[0g8vuyeasrp0vhsetov0ph"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations/ABCD1234DCBA",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations",
+										"ABCD1234DCBA"
+									]
+								},
+								"description": "When invalid data is passed, it is expected to return a 4xx error"
+							},
+							"response": [
+								{
+									"id": "5d4e226e-546f-49e1-9295-bbebd2fa5a90",
+									"name": "Get Fund Allocation Status",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {},
+										"url": {
+											"raw": "{{api_host}}/api/v2/users/{{user_id}}?include=status",
+											"host": [
+												"{{api_host}}"
+											],
+											"path": [
+												"api",
+												"v2",
+												"users",
+												"{{user_id}}"
+											],
+											"query": [
+												{
+													"key": "include",
+													"value": "status",
+													"equals": true
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "",
+									"header": [],
+									"cookie": [],
+									"responseTime": "0",
+									"body": "{\n  \"data\": {\n    \"fundAllocation_status\": unclaimed\n  }\n}"
+								}
+							]
+						},
+						{
+							"name": "/fundAllocations - Create a P2P Allocation",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "b2196959-5f3a-441b-8a3f-8ab6f202c970",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "da5c7c17-581e-4dad-a480-19f14f1b3826",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 201 Created\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											"",
+											"// JSON Contains ID Key:",
+											"pm.test(\"Response Body contains ID key\", function () {",
+											"    pm.expect(pm.response.text()).to.include(\"claims\");",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{company_api_key}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"fundAllocations\",\n        \"attributes\": {\n            \"amount\": \"5.00\",\n            \"noteToRecipient\": \"UI Note to Recipient\",\n            \"noteToSelf\": \"UI Note to Self\",\n            \"email\": \"nelson.gill@chimp.net\",\n            \"suppressEmail\": true\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations"
+									]
+								},
+								"description": "This POST assumes there is enough money in the source Fund."
+							},
+							"response": []
+						},
+						{
+							"name": "/fundAllocations - Invalid Request",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "c82e0584-e42d-4dd3-9143-1bfee32e738e",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "03128b16-1fd4-4caa-8356-d6dc54ecaf49",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 400 Bad Request\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{company_api_key}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"1234\",\n        \"attributes\": {\n            \"key\": \"value\",\n            \"key2\": true,\n            \"suppressEmail\": true\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations"
+									]
+								},
+								"description": "This POST assumes there is enough money in the source Fund."
+							},
+							"response": []
+						},
+						{
+							"name": "/fundAllocations - Blank Request",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "930effd3-5e9a-4aa6-9496-6670453cd131",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "e3e090bc-f77d-4f30-93ff-75e7772c40dd",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{company_api_key}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \n    }\n}\n  "
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations"
+									]
+								},
+								"description": "This POST assumes there is enough money in the source Fund."
+							},
+							"response": []
+						},
+						{
+							"name": "/fundAllocations - Missing Auth API Key",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "36ea5956-fd69-4323-9dde-3d2aa5491d67",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "ce16119a-e2b1-4081-a5a5-8ee8b11948d9",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											"",
+											"// Write test to check for \"error\": \"Forbidden\" in response."
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"fundAllocations\",\n        \"attributes\": {\n            \"amount\": \"5.0\",\n            \"noteToRecipient\": \"UI Note to Recipient\",\n            \"noteToSelf\": \"UI Note to Self\",\n            \"email\": \"nelson.gill@chimp.net\",\n            \"suppressEmail\": true\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations"
+									]
+								},
+								"description": "This POST assumes there is enough money in the source Fund."
+							},
+							"response": []
+						},
+						{
+							"name": "/fundAllocations - Invalid Auth API Key",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "36ea5956-fd69-4323-9dde-3d2aa5491d67",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a47f64cb-ba20-4cf0-b2c6-8322e7bd3166",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 403\", function () {",
+											"    pm.response.to.have.status(403);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											"",
+											"// Write test to check for \"error\": \"Forbidden\" in response."
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "asfgha9p08vhpa9erhvp9arghfvp09-aergvhp9a8erg"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"fundAllocations\",\n        \"attributes\": {\n            \"amount\": \"5.0\",\n            \"noteToRecipient\": \"UI Note to Recipient\",\n            \"noteToSelf\": \"UI Note to Self\",\n            \"email\": \"nelson.gill@chimp.net\",\n            \"suppressEmail\": true\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations"
+									]
+								},
+								"description": "This POST assumes there is enough money in the source Fund."
+							},
+							"response": []
+						},
+						{
+							"name": "/fundAllocations - Underlimit Amount",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "fdf38c62-589a-4921-9fb4-c91df43f8449",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "7af31a3d-814a-4958-a2e0-bb3ba6fe61dc",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"// Note: This fails due to a bug, its returning a 201 instead of a 4xx",
+											"pm.test(\"Expecting Status code to be 422 Unprocessable Entry\", function () {",
+											"    pm.response.to.have.status(422);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{company_api_key}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"fundAllocations\",\n        \"attributes\": {\n            \"amount\": \"0.01\",\n            \"noteToRecipient\": \"UI Note to Recipient\",\n            \"noteToSelf\": \"UI Note to Self\",\n            \"email\": \"nelson.gill@chimp.net\",\n            \"suppressEmail\": true\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations"
+									]
+								},
+								"description": "This POST assumes there is enough money in the source Fund."
+							},
+							"response": []
+						},
+						{
+							"name": "/fundAllocations - Overlimit Amount",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "624bd246-0166-482f-b633-ed259980d0b5",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "6beb5033-9fbf-4711-b4fa-25a565d26cb9",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 422 Unprocessable Entry\", function () {",
+											"    pm.response.to.have.status(422);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.api+json"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{company_api_key}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"fundAllocations\",\n        \"attributes\": {\n            \"amount\": \"1000000001.0\",\n            \"noteToRecipient\": \"UI Note to Recipient\",\n            \"noteToSelf\": \"UI Note to Self\",\n            \"email\": \"nelson.gill@chimp.net\",\n            \"suppressEmail\": true\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/fundAllocations",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"fundAllocations"
+									]
+								},
+								"description": "This POST assumes there is enough money in the source Fund."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"id": "9cdb836b-7cbf-4049-ad32-376bdabf4b3f",
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"id": "9c6a27c9-92ac-46b3-82da-f89c63eb3e1a",
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "End to End Tests",
+					"description": "",
+					"item": [],
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"id": "2566673a-99ae-4cd5-a847-461875c7e8dc",
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"id": "41ad39f3-dc90-4f26-aefd-d00e48d6d52d",
+						"type": "text/javascript"
+					}
+				}
+			]
+		},
+		{
+			"name": "User API (Prototype) (WIP)",
+			"description": "",
+			"item": [
+				{
+					"name": "Test Cases",
+					"description": "",
+					"item": [
+						{
+							"name": "GET /users - All Users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b45f20bf-cdab-480c-86d1-1ce807959ff0",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											"",
+											"// JSON Content Test:",
+											"pm.test(\"Response should not contain error\", function () { ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"",
+											"// JSON Contains ID Key:",
+											"pm.test(\"Response Body contains ID key\", function () {",
+											"    pm.expect(pm.response.text()).to.include(\"id\");",
+											"});",
+											"",
+											"// JSON Value Equality Check:",
+											"pm.test(\"Response X key contains Y value\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.data[0].type).to.eql(\"users\");",
+											"});",
+											""
+										]
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "15163e5c-5d43-404b-a627-9e3c1e358591",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users"
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "GET /users/{id} - User by Valid ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "67e6c37c-9678-4dfa-b81d-9cedae2637c5",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											"",
+											"// JSON Content Test:",
+											"pm.test(\"Response should not contain error\", function () { ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"",
+											"// JSON Contains ID Key:",
+											"pm.test(\"Response Body contains ID key\", function () {",
+											"    pm.expect(pm.response.text()).to.include(\"id\");",
+											"});",
+											""
+										]
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "15163e5c-5d43-404b-a627-9e3c1e358591",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users/{{validUserId}}",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users",
+										"{{validUserId}}"
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "GET /users/{id} - User by Invalid ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5aee5a00-81cf-4e41-9629-b9249b066722",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "15163e5c-5d43-404b-a627-9e3c1e358591",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users/asdfasdf",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users",
+										"asdfasdf"
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "GET /users/{id} - User by Unknown ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0d735fbb-b870-43bf-84f1-e00c1d2f0a66",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 404\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											""
+										]
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "15163e5c-5d43-404b-a627-9e3c1e358591",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users/0",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users",
+										"0"
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "POST /users - Valid User Request",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "028bde41-0787-4a3c-85e8-1c3628cbd7e4",
+										"type": "text/javascript",
+										"exec": [
+											"function garbageName() {",
+											"    // Creates a text string that is 15 characters long, starting with a capital letter.",
+											"    var uppercase = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";",
+											"    var lowercase = \"abcdefghijklmnopqrstuvwxyz\";",
+											"    var returnStr = '';",
+											"    var firstLetter = uppercase.charAt(Math.floor(Math.random() * uppercase.length));",
+											"",
+											"    for (var i = 0; i < 14; i++) {",
+											"        returnStr += lowercase.charAt(Math.floor(Math.random() * lowercase.length));",
+											"    }",
+											"    return firstLetter + returnStr;",
+											"}",
+											"",
+											"pm.variables.set(\"randomName\", garbageName());",
+											"var showRandomName = pm.variables.get(\"randomName\");",
+											"console.log(\"POST Valid User Fake Name Value: \" + showRandomName);",
+											"",
+											"function generateValue() {",
+											"    // Generates a random Int between 10000-25000",
+											"    var min = Math.ceil(10000);",
+											"    var max = Math.floor(25000);",
+											"",
+											"    return String((Math.random() * (max - min) + min).toFixed(0));",
+											"}",
+											"",
+											"// var numValue = generateValue();",
+											"pm.variables.set(\"randomInt\", generateValue());",
+											"",
+											"var showRandomInt = pm.variables.get(\"randomInt\");",
+											"console.log(\"POST Valid User Email Random Int Value: \" + showRandomInt);",
+											"",
+											"",
+											"// Sets the random generated variable to a global value",
+											"// pm.globals.set(\"randomNum\", numValue);",
+											"",
+											"// Calls the global variable and stores as a new local variable",
+											"// var whyNotWork = pm.globals.get(\"randomNum\");",
+											"",
+											"// Logs the stored local variable to make sure it worked",
+											"// console.log(\"The generated value is stored globally as: \" + whyNotWork);"
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "c0cd586a-04a6-43e5-bcb2-8109bf683177",
+										"type": "text/javascript",
+										"exec": [
+											"// Set Response Variables:",
+											"var jsonData = pm.response.json();",
+											"var checkRandomName = pm.variables.get(\"randomName\");",
+											"",
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 201 Created\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											"",
+											"// Correct Value Equality Test:",
+											"pm.test(\"POST Response firstName key contains generated value of \" + checkRandomName, function () {",
+											"    pm.expect(jsonData.data.attributes.firstName).to.eql(checkRandomName);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"users\",\n        \"attributes\": {\n            \"firstName\": \"{{randomName}}\",\n            \"lastName\": \"Test\",\n            \"email\": \"{{randomName}}.test+{{randomInt}}@chimp.net\",\n            \"password\": \"GiveAndLetGive!123\",\n            \"passwordConfirmation\": \"GiveAndLetGive!123\"\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users"
+									]
+								},
+								"description": "Posting a new VALID user"
+							},
+							"response": []
+						},
+						{
+							"name": "POST /users - Invalid User Request",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ad3954e1-976c-41ef-bfd6-7e2838b5c271",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "e06d23ed-a03b-49bf-be6d-3db9ad8c06c4",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 400 Bad Request\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"users\",\n        \"attributes\": {\n            \"email\": \"dahdahdah\",\n            \"password\": \"\",\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users"
+									]
+								},
+								"description": "Posting a new VALID user"
+							},
+							"response": []
+						},
+						{
+							"name": "POST /users - Duplicate User Request",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ad3954e1-976c-41ef-bfd6-7e2838b5c271",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "2976a1d1-c8ed-43da-b3aa-8313b6c7e77b",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 422 Unprocessable Entity\", function () {",
+											"    pm.response.to.have.status(422);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"users\",\n        \"attributes\": {\n            \"firstName\": \"Shirley\",\n            \"lastName\": \"Nader\",\n            \"email\": \"shirley.nader@bins.info\",\n            \"password\": \"GiveAndLetGive!123\",\n            \"passwordConfirmation\": \"GiveAndLetGive!123\"\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users"
+									]
+								},
+								"description": "Posting a new VALID user"
+							},
+							"response": []
+						},
+						{
+							"name": "POST /users - Blank User Request",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "76508341-6095-4e54-ad47-7d8825f446a7",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a9074f9c-ed88-4b70-a328-5277e5b864b5",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 422 Unprocessable Entry\", function () {",
+											"    pm.response.to.have.status(422);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"users\",\n        \"attributes\": {\n            \"firstName\": \"\",\n            \"lastName\": \"\",\n            \"email\": \"\",\n            \"password\": \"\",\n            \"passwordConfirmation\": \"\"\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users"
+									]
+								},
+								"description": "Posting a new VALID user"
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH /users - Valid Existing User",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "48655d8a-dc73-416a-9a99-b1ed5d601a54",
+										"type": "text/javascript",
+										"exec": [
+											"function garbageName() {",
+											"    // Creates a text string that is 15 characters long, starting with a capital letter.",
+											"    var uppercase = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";",
+											"    var lowercase = \"abcdefghijklmnopqrstuvwxyz\";",
+											"    var returnStr = '';",
+											"    var firstLetter = uppercase.charAt(Math.floor(Math.random() * uppercase.length));",
+											"",
+											"    for (var i = 0; i < 14; i++) {",
+											"        returnStr += lowercase.charAt(Math.floor(Math.random() * lowercase.length));",
+											"    }",
+											"    return firstLetter + returnStr;",
+											"}",
+											"",
+											"pm.variables.set(\"randomName\", garbageName());",
+											"var showRandomName = pm.variables.get(\"randomName\");",
+											"console.log(\"PATCH existing user fake name value: \" + showRandomName);"
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "7344aee4-1902-490f-8acb-f2d77d926947",
+										"type": "text/javascript",
+										"exec": [
+											"// Set up Test Variables:",
+											"var checkPatchedName = pm.variables.get(\"randomName\");",
+											"var jsonData = pm.response.json();",
+											"",
+											"",
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 200 Ok\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Response Time Test",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											"",
+											"// JSON Value Equality Check",
+											"pm.test(\"Patch Response firstName key contains expected value\", function () {",
+											"    pm.expect(jsonData.data.attributes.firstName).to.eql(checkPatchedName);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"data\": {\n    \"type\": \"users\",\n    \"id\": \"{{patchUserId}}\",\n    \"attributes\": {\n      \"firstName\": \"{{randomName}}\"\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users/{{patchUserId}}",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users",
+										"{{patchUserId}}"
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH /users - Invalid Existing User",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5a863ac9-c735-472e-87cd-401fa97b9ea7",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "f5b974c3-c425-40fe-8acb-84d8ee6a830f",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 400 Bad Request Ok\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"data\": {\n    \"type\": \"users\",\n    \"id\": \"{{patchUserId}}\",\n    \"attributes\": {\n      \"firstName\": \"{{randomName}}\"\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users/0",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users",
+										"0"
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH /users - Blank User",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "bf46a77f-a9f5-484d-a035-7655e492c6cf",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "2d4dbd94-e1f3-4fab-9689-1139765a3f2e",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 404 Not Found\", function () {",
+											"    pm.response.to.have.status(404);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"data\": {\n    \"type\": \"users\",\n    \"id\": \"{{patchUserId}}\",\n    \"attributes\": {\n      \"firstName\": \"{{randomName}}\"\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users/",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users",
+										""
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "PATCH /users - Invalid Patch Request",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "bb66499b-3fa2-47d3-9d93-2b560a2e1cfb",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "8877e0a4-5b51-425d-a842-2cde1752c1db",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 400 Bad Request\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"data\": {\n    \"type\": \"users\",\n    \"id\": \"{{patchUserId}}\",\n    \"attributes\": {\n      \"invalidKey\": \n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users/{{patchUserId}}",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users",
+										"{{patchUserId}}"
+									]
+								},
+								"description": null
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "End to End Tests",
+					"description": "*Contains API test for User API happy path*\n\n_Post new user > Get new user by ID > Patch user > Get user by ID > Get User List_  \n\n- Step 1: Creates a new valid user\n- Step 2: Calls that user with Get/Id to make sure it was created\n- Step 3: Updates the new user\n- Step 4: Calls that user with Get/Id and checks that the update is applied",
+					"item": [
+						{
+							"name": "Step 1 - Post Valid User",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "b432662d-9d58-4501-adee-f2b4161f5a90",
+										"type": "text/javascript",
+										"exec": [
+											"function garbageName() {",
+											"    // Creates a text string that is 15 characters long, starting with a capital letter.",
+											"    var uppercase = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";",
+											"    var lowercase = \"abcdefghijklmnopqrstuvwxyz\";",
+											"    var returnStr = '';",
+											"    var firstLetter = uppercase.charAt(Math.floor(Math.random() * uppercase.length));",
+											"",
+											"    for (var i = 0; i < 14; i++) {",
+											"        returnStr += lowercase.charAt(Math.floor(Math.random() * lowercase.length));",
+											"    }",
+											"    return firstLetter + returnStr;",
+											"}",
+											"",
+											"function generateValue() {",
+											"    // Generates a random Int between 10000-25000",
+											"    var min = Math.ceil(10000);",
+											"    var max = Math.floor(25000);",
+											"",
+											"    return String((Math.random() * (max - min) + min).toFixed(0));",
+											"}",
+											"",
+											"pm.variables.set(\"randomName\", garbageName());",
+											"pm.variables.set(\"randomInt\", generateValue());",
+											"var showRandomName = pm.variables.get(\"randomName\");",
+											"var showRandomInt = pm.variables.get(\"randomInt\");",
+											"console.log(\"E2E Step 1 POST Valid User firstName Value: \" + showRandomName);",
+											"console.log(\"E2E Step 1 POST Valid User emails Value: \" + showRandomName + \".test\" + showRandomInt + \"@example.com\");"
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "122b7fb0-9320-4199-851d-72159cb38fc4",
+										"type": "text/javascript",
+										"exec": [
+											"// Set Response Variables:",
+											"var jsonData = pm.response.json(); // Stores POST Response JSON",
+											"pm.environment.set(\"e2eUserId\", jsonData.data.id); // stores Id of created user (to pass to other steps/tests)",
+											"",
+											"",
+											"// Status Test:",
+											"pm.test(\"Expecting Status code to be 201 Created\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											"",
+											"// Correct Value Equality Test:",
+											"var checkRandomName = pm.variables.get(\"randomName\");",
+											"pm.test(\"POST Response firstName key contains generated value of \" + checkRandomName, function () {",
+											"    pm.expect(jsonData.data.attributes.firstName).to.eql(checkRandomName);",
+											"});",
+											"",
+											"// Some Debug logging:",
+											"var createdUserId = pm.environment.get(\"e2eUserId\");",
+											"console.log(\"The E2E Step 1 POST created a new user with an ID of: \" + createdUserId);",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"data\": {\n        \"type\": \"users\",\n        \"attributes\": {\n            \"firstName\": \"{{randomName}}\",\n            \"lastName\": \"Test\",\n            \"email\": \"{{randomName}}.test+{{randomInt}}@chimp.net\",\n            \"password\": \"GiveAndLetGive!123\",\n            \"passwordConfirmation\": \"GiveAndLetGive!123\"\n        }\n    }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users"
+									]
+								},
+								"description": "Posting a new VALID user"
+							},
+							"response": []
+						},
+						{
+							"name": "Step 2 - Get the New User By ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "967ded5c-5286-4796-bd22-0a537b100500",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											"",
+											"// JSON Content Test:",
+											"pm.test(\"Response should not contain error\", function () { ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"",
+											"// JSON Contains ID Key:",
+											"pm.test(\"Response Body contains ID key\", function () {",
+											"    pm.expect(pm.response.text()).to.include(\"id\");",
+											"});",
+											"",
+											"// JSON ID Key Value Match:",
+											"// Add a test here to check the the response value of ID is equal to the 'e2eUserId' value..."
+										]
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "15163e5c-5d43-404b-a627-9e3c1e358591",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users/{{e2eUserId}}",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users",
+										"{{e2eUserId}}"
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "Step 3 - Update the New User",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "bfa94030-030d-4672-9a75-a156bc2ea2bc",
+										"type": "text/javascript",
+										"exec": [
+											"function garbageName() {",
+											"    // Creates a text string that is 15 characters long, starting with a capital letter.",
+											"    var uppercase = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";",
+											"    var lowercase = \"abcdefghijklmnopqrstuvwxyz\";",
+											"    var returnStr = '';",
+											"    var firstLetter = uppercase.charAt(Math.floor(Math.random() * uppercase.length));",
+											"",
+											"    for (var i = 0; i < 14; i++) {",
+											"        returnStr += lowercase.charAt(Math.floor(Math.random() * lowercase.length));",
+											"    }",
+											"    return firstLetter + returnStr;",
+											"}",
+											"",
+											"pm.variables.set(\"randomName\", garbageName());",
+											"var showRandomName = pm.variables.get(\"randomName\");",
+											"console.log(\"E2E Step 3 PATCH Valid User Fake Name Value: \" + showRandomName);"
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "870bca4e-bf0c-4264-be7b-229da0c78dea",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 200 Ok\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"data\": {\n    \"type\": \"users\",\n    \"id\": \"{{e2eUserId}}\",\n    \"attributes\": {\n      \"firstName\": \"{{randomName}}\"\n    }\n  }\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users/{{e2eUserId}}",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users",
+										"{{e2eUserId}}"
+									]
+								},
+								"description": null
+							},
+							"response": []
+						},
+						{
+							"name": "Step 4 - Get the New User By ID Again",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "856131b3-0299-48b7-8f33-98670a9c1c7d",
+										"type": "text/javascript",
+										"exec": [
+											"// Status Check Test:",
+											"pm.test(\"Expecting Status code to be 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Response Time Test:",
+											"pm.test(\"Response time is less than 750ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);",
+											"});",
+											"",
+											"// JSON Content Test:",
+											"pm.test(\"Response should not contain error\", function () { ",
+											"    pm.response.to.not.have.jsonBody(\"error\"); ",
+											"});",
+											"",
+											"// JSON Contains ID Key:",
+											"pm.test(\"Response Body contains ID key\", function () {",
+											"    pm.expect(pm.response.text()).to.include(\"id\");",
+											"});",
+											""
+										]
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "15163e5c-5d43-404b-a627-9e3c1e358591",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/vnd.api+json"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{api_host}}/api/v2/users/{{e2eUserId}}",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"api",
+										"v2",
+										"users",
+										"{{e2eUserId}}"
+									]
+								},
+								"description": null
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"id": "295151b2-3507-43fe-aabc-d0bf6baa08ec",
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"id": "e280bb8b-d409-4f89-87ae-d03c582207e7",
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "49950eb7-b1f0-4626-a006-6642d2fac757",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b2c3c144-6837-471d-9ba3-e765a9946c2f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"exec": [
+					""
+				],
+				"id": "56088063-0ccc-4274-ac1b-e39d042e68de",
+				"type": "text/javascript"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"exec": [
+					""
+				],
+				"id": "4abc55dc-7948-4d0f-be96-215cd3d545bd",
+				"type": "text/javascript"
+			}
+		}
+	]
+}

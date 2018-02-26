@@ -38,7 +38,8 @@ console.log("E2E Step 1 POST Valid User Email Random Int Value: " + pm.variables
 pm.sendRequest({
     url: pm.environment.get("api_host") + '/api/v2/fundAllocations',
     method: 'POST',
-    header: ['Content-Type:application/vnd.api+json',
+    header: [
+        'Content-Type:application/vnd.api+json',
         'Accept:application/vnd.api+json',
         'Authorization:' + pm.environment.get("company_api_key")
     ],
@@ -61,3 +62,17 @@ pm.sendRequest({
     console.log(res);
     pm.environment.set("fundAllocationId", res.json().data.id);
 });1
+
+// The below sends a GET request as part of the Pre-req:
+pm.sendRequest({
+    url: 'https://postman-echo.com/get',
+    method: 'GET',
+    header: [
+        'Content-Type:application/vnd.api+json',
+        'Accept:application/vnd.api+json'
+    ],
+}, function (err, res) {
+    console.log(res);
+    // Sets an environment variable of getReturnedId based on the response:
+    pm.environment.set("getReturnedId", res.json().data.id);
+});
