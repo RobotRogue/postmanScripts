@@ -48,3 +48,6 @@ console.log("Outputting the value of responseStuff.data[0].type - " + responseSt
 // Outputs the value of the randomInt variable that was stored from the preReq function
 var checkRandomInt = pm.variables.get("randomInt");
 console.log("Post-request script called the variable as: " + checkRandomInt);
+
+// Simpler way to handle the above:
+console.log("Post-request script called the variable as: " + pm.variables.get("randomInt"));
