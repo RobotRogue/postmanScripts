@@ -37,6 +37,16 @@ pm.test("Check value something is equal to string value x", function() {
     pm.expect(pm.response.json().data[0].id).to.equal("21");
 });
 
+// Additional Equality Check:
+pm.test("Response Body contains key Status with value of Unclaimed", function () {
+    pm.expect(pm.response.json().data.attributes.status).to.equal("unclaimed");
+});
+
+// Check Value Against Stored Variable:
+pm.test("Response Body contains same ID as what was posted in Pre-req step", function () {
+    pm.expect(pm.response.json().data.id).to.equal(pm.environment.get("fundAllocationId"));
+});
+
 
 // JSON Value Equality Check (Another Example)
 var jsonData = pm.response.json(); //save response from API call as a variable
