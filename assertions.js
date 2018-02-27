@@ -32,6 +32,11 @@ pm.test("Response type key contains 'users' value", function () {
     pm.expect(jsonData.data[0].type).to.eql("users");
 });
 
+// More Equality Checks:
+pm.test("Check value something is equal to string value x", function() {
+    pm.expect(pm.response.json().data[0].id).to.equal("21");
+});
+
 
 // JSON Value Equality Check (Another Example)
 var jsonData = pm.response.json(); //save response from API call as a variable
