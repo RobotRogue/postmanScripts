@@ -32,7 +32,6 @@ pm.variables.set("randomInt", generateValue());
 console.log("E2E Step 1 POST Valid User Email Random Int Value: " + pm.variables.get("randomInt"));
 
 
-
 // The below sends a POST to ensure that at least ONE allocation exists.
 // It then passes the allocation ID to the GET request.
 pm.sendRequest({
@@ -62,6 +61,7 @@ pm.sendRequest({
     console.log(res);
     pm.environment.set("fundAllocationId", res.json().data.id);
 });1
+
 
 // The below sends a GET request as part of the Pre-req:
 pm.sendRequest({
