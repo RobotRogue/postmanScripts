@@ -60,7 +60,7 @@ pm.sendRequest({
 }, function (err, res) {
     console.log(res);
     pm.environment.set("fundAllocationId", res.json().data.id);
-});1
+});
 
 
 // The below sends a GET request as part of the Pre-req:
@@ -75,4 +75,27 @@ pm.sendRequest({
     console.log(res);
     // Sets an environment variable of getReturnedId based on the response:
     pm.environment.set("getReturnedId", res.json().data.id);
+});
+
+
+// The below sends a POST to stripe and stores the response in a variable called stripe_token
+// The {{stripe_pub_key}} is stored in an environment variable, as well as the {{stripe_token}}
+pm.sendRequest({
+    url: 'https://api.stripe.com/v1/tokens',
+    method: 'POST',
+    header: [
+        'Authorization: Bearer ' + pm.environment.get("stripe_pub_key"),
+        'Content-Type: application/x-www-form-urlencoded'
+    ],
+    body: {
+        mode: 'urlencoded',
+        urlencoded: [
+            { key: "card[number]", value: "4242424242424242", disabled: false },
+            { key: "card[exp_month]", value: "12", disabled: false },
+            { key: "card[exp_year]", value: "2019", disabled: false },
+            { key: "card[cvc]", value: "123", disabled: false }
+        ]
+    }
+}, function (err, res) {
+    pm.environment.set("stripe_token", res.json().id);
 });
