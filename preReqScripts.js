@@ -97,5 +97,6 @@ pm.sendRequest({
         ]
     }
 }, function (err, res) {
-    pm.environment.set("stripe_token", res.json().id);
+    pm.variables.set("stripe_token", res.json().id);
+    // Keeping the token at the Test/Request level instead of environment because it makes more sense that way.
 });
