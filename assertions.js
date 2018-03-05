@@ -7,6 +7,11 @@ pm.test("Expecting Status code to be 200", function () {
     pm.response.to.have.status(200);
 });
 
+// Multiple Status code check
+pm.test("Expecting status code to be 400/404", function () {
+    pm.expect(pm.response.code).to.be.oneOf([400, 404]);
+});
+
 
 // Response Time Test:
 pm.test("Response time is less than 750ms", function () {
