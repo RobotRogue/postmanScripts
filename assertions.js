@@ -19,7 +19,7 @@ pm.test("Response time is less than 750ms", function () {
 });
 
 
-// JSON Content Test:
+// JSON Content Test: (Applies to the wrapper/container level, so like 'errors' or 'data' and so on)
 pm.test("Response should NOT contain error", function () {
     pm.response.to.not.have.jsonBody("error");
 });
@@ -29,13 +29,13 @@ pm.test("Response SHOULD contain error", function () {
 });
 
 
-// JSON Contains ID Key:
+// JSON Contains ID Key: (Applies to Keys inside the JSON wrapper/container)
 pm.test("Response Body contains ID key", function () {
     pm.expect(pm.response.text()).to.include("id");
 });
 
 
-// JSON Value Equality Check:
+// JSON Value Equality Check: (Compares the equality response jsonpath to a specified value)
 var jsonData = pm.response.json(); // Better to create this outside of the funciton to make it reusable for other tests if needed.
 pm.test("Response type key contains 'users' value", function () {
     pm.expect(jsonData.data[0].type).to.eql("users");
