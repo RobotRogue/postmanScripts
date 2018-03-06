@@ -20,8 +20,12 @@ pm.test("Response time is less than 750ms", function () {
 
 
 // JSON Content Test:
-pm.test("Response should not contain error", function () {
+pm.test("Response should NOT contain error", function () {
     pm.response.to.not.have.jsonBody("error");
+});
+
+pm.test("Response SHOULD contain error", function () {
+    pm.response.to.have.jsonBody("errors");
 });
 
 
