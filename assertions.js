@@ -71,3 +71,70 @@ console.log("Post-request script called the variable as: " + checkRandomInt);
 
 // Simpler way to handle the above:
 console.log("Post-request script called the variable as: " + pm.variables.get("randomInt"));
+
+
+// ###########################################
+// AND NOW FOR SOMETHING COMPLETELY DIFFERENT:
+// ###########################################
+
+// ### Declare Variables: ###
+var jsonData = pm.response.json();
+
+
+// ### Declare Functions: ###
+// Function to validate keys available in Json Response
+function validateTests(actual, expected) {
+    pm.test("'" + expected + "' key should be available in response", function () {
+        pm.expect(actual).to.equal(expected);
+    });
+}
+
+// Function to assert Json value with the expected value
+function jsonValueCheck(testCase, jsonKey, expectedValue) {
+    pm.test(testCase, function () {
+        // NOTE: it's better to declare that variable outside of the function.
+        //var jsonData = pm.response.json();
+        pm.expect(jsonKey).to.eql(expectedValue);
+    });
+}
+
+
+// ### Declare Tests to Execute: ###
+try {
+    var firstKey;
+    for (var i in jsonData) {
+        firstKey = i;
+    }
+
+    // First checks if the response contains "Data", if not, fail.
+    pm.test("'data' key should be available in response", function () {
+        pm.expect(firstKey).to.equal('data');
+    });
+
+    var dataArray = ['id', 'type', 'links', 'attributes', 'relationships'];
+    for (var i in jsonData.data) {
+        validateTests(i, dataArray[dataArray.indexOf(i)]);
+    }
+
+    var attributesArray = ['avatar', 'displayName', 'language',
+                           'balance', 'activeRoleId', 'createdAt'];
+    for (var i in jsonData.data.attributes) {
+        validateTests(i, attributesArray[attributesArray.indexOf(i)]);
+    }
+
+    var relationshipsArray = ['administeredGroups', 'administeredCampaigns', 'administeredCompanies',
+                              'administeredBeneficiaries', 'beneficiaryAdminRoles', 'companyAdminRoles',
+                              'donorRole', 'chimpAdminRole', 'activeRole'];
+    for (var i in jsonData.data.relationships) {
+        validateTests(i, relationshipsArray[relationshipsArray.indexOf(i)]);
+    }
+
+    var userId = pm.variables.get("user_id");
+    // Check if user Id matches the user Id passed
+    jsonValueCheck("User Id in response should match the user Id passed", jsonData.data.id, userId);
+
+    // Check value of data.type
+    jsonValueCheck("Value of key 'data[type]' should be users", jsonData.data.type, "users");
+} catch (err) {
+    console.log(err);
+}
