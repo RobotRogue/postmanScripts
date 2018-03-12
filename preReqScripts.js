@@ -7,7 +7,7 @@
 function garbageName() {
     var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var lowercase = "abcdefghijklmnopqrstuvwxyz";
-    var returnStr = '';
+    var returnStr = "";
     var firstLetter = uppercase.charAt(Math.floor(Math.random() * uppercase.length));
 
     for (var i = 0; i < 14; i++) {
@@ -97,6 +97,6 @@ pm.sendRequest({
         ]
     }
 }, function (err, res) {
-    pm.variables.set("stripe_token", res.json().id);
+    pm.variables.set("stripe_token", res.json().data.id);
     // Keeping the token at the Test/Request level instead of environment because it makes more sense that way.
 });
