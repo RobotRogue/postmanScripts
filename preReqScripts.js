@@ -58,8 +58,11 @@ pm.sendRequest({
         })
     }
 }, function (err, res) {
-    console.log(res);
-    pm.environment.set("fundAllocationId", res.json().data.id);
+    if (res.json().error) {
+        console.log("There was a problem with the Pre-request. Check console for details.");
+    } else {
+        pm.environment.set("fundAllocationId", res.json().data.id);
+    }
 });
 
 
@@ -72,9 +75,12 @@ pm.sendRequest({
         'Accept:application/vnd.api+json'
     ],
 }, function (err, res) {
-    console.log(res);
-    // Sets an environment variable of getReturnedId based on the response:
-    pm.environment.set("getReturnedId", res.json().data.id);
+    if (res.json().error) {
+        console.log("There was a problem with the Pre-request. Check console for details.");
+    } else {
+        // Sets an environment variable of getReturnedId based on the response:
+        pm.environment.set("getReturnedId", res.json().data.id);
+    }
 });
 
 
