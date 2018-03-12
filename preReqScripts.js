@@ -97,6 +97,11 @@ pm.sendRequest({
         ]
     }
 }, function (err, res) {
-    pm.variables.set("stripe_token", res.json().data.id);
-    // Keeping the token at the Test/Request level instead of environment because it makes more sense that way.
+    if (res.json().error) {
+        console.log("There was a problem getting the stripe token. Check console for details.");
+    } else {
+        pm.variables.set("stripe_token", res.json().data.id);
+        // Keeping the token at the Test/Request level instead of environment because it makes more sense that way.
+        console.log("You got a stripe token of: " + pm.variables.get("stripe_token"));
+    }
 });
