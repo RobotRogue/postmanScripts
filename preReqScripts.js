@@ -86,6 +86,7 @@ pm.sendRequest({
 
 // The below sends a POST to stripe and stores the response in a variable called stripe_token
 // The {{stripe_pub_key}} is stored in an environment variable, as well as the {{stripe_token}}
+const expYear = (new Date()).getFullYear() + 2;
 pm.sendRequest({
     url: 'https://api.stripe.com/v1/tokens',
     method: 'POST',
@@ -98,7 +99,7 @@ pm.sendRequest({
         urlencoded: [
             { key: "card[number]", value: "4242424242424242", disabled: false },
             { key: "card[exp_month]", value: "12", disabled: false },
-            { key: "card[exp_year]", value: "2019", disabled: false },
+            { key: "card[exp_year]", value: expYear, disabled: false },
             { key: "card[cvc]", value: "123", disabled: false }
         ]
     }
