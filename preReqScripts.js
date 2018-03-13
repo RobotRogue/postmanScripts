@@ -97,10 +97,10 @@ pm.sendRequest({
     body: {
         mode: 'urlencoded',
         urlencoded: [
-            { key: "card[number]", value: "4242424242424242", disabled: false },
-            { key: "card[exp_month]", value: "12", disabled: false },
-            { key: "card[exp_year]", value: expYear, disabled: false },
-            { key: "card[cvc]", value: "123", disabled: false }
+            {key: "card[number]", value: "4242424242424242", disabled: false},
+            {key: "card[exp_month]", value: "12", disabled: false},
+            {key: "card[exp_year]", value: expYear, disabled: false},
+            {key: "card[cvc]", value: "123", disabled: false}
         ]
     }
 }, function (err, res) {
