@@ -59,7 +59,7 @@ pm.sendRequest({
     }
 }, function (err, res) {
     if (res.json().error) {
-        console.log("There was a problem with the Pre-request. Check console for details.");
+        console.log("### ALERT! There was a problem with the Pre-request. Check console for details.");
     } else {
         pm.environment.set("fundAllocationId", res.json().data.id);
     }
@@ -76,7 +76,7 @@ pm.sendRequest({
     ],
 }, function (err, res) {
     if (res.json().error) {
-        console.log("There was a problem with the Pre-request. Check console for details.");
+        console.log("### ALERT! There was a problem with the Pre-request. Check console for details.");
     } else {
         // Sets an environment variable of getReturnedId based on the response:
         pm.environment.set("getReturnedId", res.json().data.id);
@@ -105,7 +105,7 @@ pm.sendRequest({
     }
 }, function (err, res) {
     if (res.json().error) {
-        console.log("There was a problem getting the stripe token. Check console for details.");
+        console.log("### ALERT! There was a problem getting the stripe token. Check console for details.");
     } else {
         pm.variables.set("stripe_token", res.json().id);
         console.log("Token returned: " + pm.variables.get("stripe_token"));
@@ -142,7 +142,7 @@ pm.sendRequest({
     }
 }, function (err, res) {
     if (res.json().error) {
-        console.log("There was a problem with the Pre-request. Check console for details.");
+        console.log("### ALERT! There was a problem with the Pre-request. Check console for details.");
     } else {
         pm.environment.set("auth_token", res.json().access_token);
     }
