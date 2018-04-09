@@ -132,7 +132,6 @@ pm.sendRequest({
     body: {
         mode: 'urlencoded',
         urlencoded: [
-            {key: "audience", value: audience, disabled: false},
             {key: "username", value: username, disabled: false},
             {key: "password", value: password, disabled: false},
             {key: "client_id", value: client_id, disabled: false},
@@ -144,6 +143,6 @@ pm.sendRequest({
     if (res.json().error) {
         console.log("### ALERT! There was a problem with the Pre-request. Check console for details.");
     } else {
-        pm.environment.set("auth_token", res.json().access_token);
+        pm.environment.set("auth_token", res.json().id_token);
     }
 });
