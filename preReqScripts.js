@@ -126,7 +126,7 @@ pm.sendRequest({
     url: pm.environment.get("auth0_url") + '/oauth/token',
     method: 'POST',
     header: [
-        'content:application/json',
+        'Accept:application/json',
         'Content-Type:application/x-www-form-urlencoded',
     ],
     body: {
