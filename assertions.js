@@ -63,6 +63,11 @@ pm.test("Patch Response firstName key contains expected value", function () {
     pm.expect(jsonData.data.attributes.firstName).to.eql(checkPatchedName); //jsonData.data.attributes.firstName is a jsonpath value
 });
 
+// JSON Value Equality Check (Token example)
+pm.test("Ensure Response Token Matches Auth0 Start Token", function () {
+    pm.expect(pm.response.json().authToken).to.equal(pm.environment.get("auth_token"));
+});
+
 
 // Storing JSON response as a variable, then outputting a specific value of that response using JSON Path
 var responseStuff = pm.response.json();
