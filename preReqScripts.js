@@ -111,3 +111,39 @@ pm.sendRequest({
         console.log("Token returned: " + pm.variables.get("stripe_token"));
     }
 });
+
+
+// The below sends a POST request to get an oauth token for the user
+// The account needs to have been logged into at least once or else it will fail (to create user link in separated DBs)
+
+const audience = pm.environment.get("api_host") + '/api';
+const username = pm.envrionment.get("username");
+const password = pm.envrionment.get("auth_password");
+const client_id = pm.environment.get("client_id");
+const client_secret = pm.environment.get("client_secret");
+
+pm.sendRequest({
+    url: pm.environment.get("auth0_url") + '/oauth/token',
+    method: 'POST',
+    header: [
+        'content:application/json',
+        'Content-Type:application/x-www-form-urlencoded',
+    ],
+    body: {
+        mode: 'urlencoded',
+        urlencoded: [
+            {key: "audience", value: audience, disabled: false},
+            {key: "username", value: username, disabled: false},
+            {key: "password", value: password, disabled: false},
+            {key: "client_id", value: client_id, disabled: false},
+            {key: "client_secret", value: client_secret, disabled: false},
+            {key: "grant_type", value: "password", disabled: false}
+        ]
+    }
+}, function (err, res) {
+    if (res.json().error) {
+        console.log("There was a problem with the Pre-request. Check console for details.");
+    } else {
+        pm.environment.set("auth_token", res.json().access_token);
+    }
+});
