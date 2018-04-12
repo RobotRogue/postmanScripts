@@ -116,7 +116,6 @@ pm.sendRequest({
 // The below sends a POST request to get an oauth token for the user
 // The account needs to have been logged into at least once or else it will fail (to create user link in separated DBs)
 
-const audience = pm.environment.get("api_host") + '/api';
 const username = pm.envrionment.get("username");
 const password = pm.envrionment.get("auth_password");
 const client_id = pm.environment.get("client_id");
