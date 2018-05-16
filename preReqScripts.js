@@ -113,7 +113,7 @@ pm.sendRequest({
 });
 
 
-// The below sends a POST request to get an oauth token for the user
+// The below sends a POST request to get a login token for the user
 // The account needs to have been logged into at least once or else it will fail (to create user link in separated DBs)
 
 const username = pm.envrionment.get("username");
@@ -143,5 +143,19 @@ pm.sendRequest({
         console.log("### ALERT! There was a problem with the Pre-request. Check console for details.");
     } else {
         pm.environment.set("auth_token", res.json().id_token);
+    }
+});
+
+// The below code logs a user in via a Pre-Request. It has to be used in conjuction with the Auth0 Token generation above.
+pm.sendRequest({
+    url: pm.environment.get("api_host") + '/api/v2/users/login',
+    method: 'POST',
+    header: [
+        'Content-Type:application/vnd.api+json',
+        'Authorization: Bearer ' + pm.environment.get("auth_token")
+    ],
+}, function (err, res) {
+    if (res.json().error) {
+        console.log("### ALERT! There was a problem with the Pre-request. Check console for details.");
     }
 });
